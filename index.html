@@ -1,9 +1,155 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My First GitHub Site</title>
+    <style>
+        :root {
+            --header-bg: #0f172a;
+            --header-fg: #f8fafc;
+            --header-muted: #cbd5e1;
+            --header-accent: #22d3ee;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+            background: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #0f172a;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.9rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand {
+            color: var(--header-fg);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list a {
+            color: var(--header-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-list a:hover {
+            color: var(--header-accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            color: var(--header-fg);
+            border: 1px solid rgba(248, 250, 252, 0.4);
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: inline-block;
+            }
+
+            .site-nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #0f172a;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+                display: none;
+            }
+
+            .site-nav.open {
+                display: block;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                padding: 0.5rem 1rem 1rem;
+            }
+
+            .nav-list li {
+                width: 100%;
+            }
+
+            .nav-list a {
+                display: block;
+                width: 100%;
+                padding: 0.65rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, world!</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#">Truthful Traveler</a>
+            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav">Menu</button>
+            <nav class="site-nav" id="siteNav">
+                <ul class="nav-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Guides</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Hello, world!</h1>
+        <p>Your new header bar is live. Update the menu links to point to your real pages.</p>
+    </main>
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const siteNav = document.getElementById("siteNav");
+
+        menuToggle.addEventListener("click", () => {
+            const isOpen = siteNav.classList.toggle("open");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+    </script>
 </body>
 </html>
